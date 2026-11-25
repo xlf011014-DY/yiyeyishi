@@ -1,0 +1,196 @@
+﻿/* ============================================================
+   tokens.css — fonts, palettes, motion & geometry tokens
+   Two worlds (lingcha / shanxiafeng) × light / dark
+   ============================================================ */
+
+@font-face {
+  font-family: 'SongSC';
+  src: url('../assets/fonts/NotoSerifSC.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DispA';
+  src: url('../assets/fonts/CormorantGaramond.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+
+:root {
+  /* type */
+  --f-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --f-serif: 'SongSC', 'Noto Serif SC', 'Songti SC', serif;
+  --f-latin: 'DispA', 'Cormorant Garamond', Georgia, serif;
+
+  /* motion */
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);
+  --dur-press: .13s;
+  --dur-ui: .24s;
+  --dur-enter: .55s;
+  --dur-reveal: .9s;
+
+  /* geometry */
+  --r-xs: 10px;
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 38px;
+  --r-pill: 999px;
+  --nav-h: 64px;
+  --tab-h: 66px;
+  --gutter: clamp(18px, 4.2vw, 56px);
+  --container: min(1240px, 100% - var(--gutter) * 2);
+  --section-gap: clamp(72px, 11vh, 156px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+
+/* ---------- shared neutrals before worlds ---------- */
+body {
+  --paper-card: linear-gradient(158deg, #FFFBF2 0%, #F7F0E1 52%, #F1E7D6 100%);
+  --glass-blur: 26px;
+  --glass-alpha: .5;
+  --shadow-lg: 0 40px 80px -32px rgba(36, 24, 10, .45), 0 8px 24px -12px rgba(36, 24, 10, .22);
+  --shadow-md: 0 20px 42px -24px rgba(36, 24, 10, .38), 0 4px 12px -6px rgba(36, 24, 10, .16);
+  --shadow-sm: 0 10px 24px -16px rgba(36, 24, 10, .35);
+}
+
+/* ============================================================
+   WORLD: HOME (dual, neutral paper)
+   ============================================================ */
+body[data-world='home'] {
+  --bg: #F6F2E8;
+  --bg-2: #EFE9DB;
+  --fg: #1F1B15;
+  --fg-2: #4C4336;
+  --muted: #8B7F6C;
+  --line: rgba(31, 27, 21, .13);
+  --accent: #8C6A3F;
+  --accent-2: #4A5A54;
+  --accent-soft: #C9A063;
+  --glass: rgba(255, 252, 246, .52);
+  --glass-strong: rgba(255, 252, 246, .72);
+  --glass-border: rgba(255, 255, 255, .62);
+  --glass-inner: rgba(255, 255, 255, .72);
+  --glow-a: rgba(201, 160, 99, .34);
+  --glow-b: rgba(74, 90, 84, .22);
+  --glow-c: rgba(255, 240, 214, .6);
+  --selection: rgba(201, 160, 99, .35);
+}
+body[data-world='lingcha'] {
+  --bg: #F7F1E4;
+  --bg-2: #F1E7D4;
+  --fg: #241C14;
+  --fg-2: #4A3524;
+  --muted: #8E7C64;
+  --line: rgba(36, 28, 20, .14);
+  --accent: #A9762D;
+  --accent-2: #C89A5B;
+  --accent-soft: #D9C39B;
+  --glass: rgba(255, 250, 240, .5);
+  --glass-strong: rgba(255, 250, 240, .74);
+  --glass-border: rgba(255, 255, 255, .66);
+  --glass-inner: rgba(255, 255, 255, .75);
+  --glow-a: rgba(201, 160, 99, .42);
+  --glow-b: rgba(169, 118, 45, .2);
+  --glow-c: rgba(255, 246, 226, .75);
+  --selection: rgba(169, 118, 45, .3);
+}
+body[data-world='shanxiafeng'] {
+  --bg: #F3F1E9;
+  --bg-2: #E7E5DC;
+  --fg: #1E1B16;
+  --fg-2: #3C4A45;
+  --muted: #7E827C;
+  --line: rgba(30, 27, 22, .14);
+  --accent: #4A5A54;
+  --accent-2: #9A6B4F;
+  --accent-soft: #9DB0A8;
+  --glass: rgba(250, 249, 244, .5);
+  --glass-strong: rgba(250, 249, 244, .74);
+  --glass-border: rgba(255, 255, 255, .66);
+  --glass-inner: rgba(255, 255, 255, .75);
+  --glow-a: rgba(157, 176, 168, .38);
+  --glow-b: rgba(154, 107, 79, .18);
+  --glow-c: rgba(255, 252, 244, .7);
+  --selection: rgba(74, 90, 84, .28);
+}
+
+/* ============================================================
+   WORLD × DARK
+   ============================================================ */
+body[data-theme='dark'][data-world='home'] {
+  --bg: #131211;
+  --bg-2: #0B0A09;
+  --fg: #F4EEE2;
+  --fg-2: #CFC4B2;
+  --muted: #93897A;
+  --line: rgba(255, 255, 255, .13);
+  --accent: #D2A566;
+  --accent-2: #9DB0A8;
+  --accent-soft: #8A6B3E;
+  --glass: rgba(34, 31, 27, .52);
+  --glass-strong: rgba(34, 31, 27, .74);
+  --glass-border: rgba(255, 255, 255, .13);
+  --glass-inner: rgba(255, 255, 255, .16);
+  --glow-a: rgba(210, 165, 102, .26);
+  --glow-b: rgba(120, 160, 150, .18);
+  --glow-c: rgba(60, 52, 42, .5);
+  --selection: rgba(210, 165, 102, .32);
+  --paper-card: linear-gradient(158deg, #2B251E 0%, #211C17 55%, #191512 100%);
+  --shadow-lg: 0 40px 80px -32px rgba(0, 0, 0, .8), 0 8px 24px -12px rgba(0, 0, 0, .5);
+  --shadow-md: 0 20px 42px -24px rgba(0, 0, 0, .7), 0 4px 12px -6px rgba(0, 0, 0, .45);
+  --shadow-sm: 0 10px 24px -16px rgba(0, 0, 0, .6);
+}
+body[data-theme='dark'][data-world='lingcha'] {
+  --bg: #14100C;
+  --bg-2: #0C0907;
+  --fg: #F6EEDE;
+  --fg-2: #D6C6AC;
+  --muted: #9C8A70;
+  --line: rgba(255, 255, 255, .12);
+  --accent: #D8A45F;
+  --accent-2: #E2C08B;
+  --accent-soft: #7E5C2C;
+  --glass: rgba(38, 31, 23, .5);
+  --glass-strong: rgba(38, 31, 23, .74);
+  --glass-border: rgba(255, 255, 255, .12);
+  --glass-inner: rgba(255, 255, 255, .15);
+  --glow-a: rgba(216, 164, 95, .24);
+  --glow-b: rgba(169, 118, 45, .16);
+  --glow-c: rgba(66, 50, 30, .55);
+  --selection: rgba(216, 164, 95, .32);
+  --paper-card: linear-gradient(158deg, #2E2519 0%, #241C12 55%, #1A140D 100%);
+  --shadow-lg: 0 40px 80px -32px rgba(0, 0, 0, .82), 0 8px 24px -12px rgba(0, 0, 0, .5);
+  --shadow-md: 0 20px 42px -24px rgba(0, 0, 0, .72), 0 4px 12px -6px rgba(0, 0, 0, .45);
+  --shadow-sm: 0 10px 24px -16px rgba(0, 0, 0, .62);
+}
+body[data-theme='dark'][data-world='shanxiafeng'] {
+  --bg: #0F1211;
+  --bg-2: #090B0A;
+  --fg: #EFEDE6;
+  --fg-2: #C7CCC6;
+  --muted: #8B918B;
+  --line: rgba(255, 255, 255, .12);
+  --accent: #A7B9B1;
+  --accent-2: #C09675;
+  --accent-soft: #5D6C66;
+  --glass: rgba(24, 30, 28, .52);
+  --glass-strong: rgba(24, 30, 28, .76);
+  --glass-border: rgba(255, 255, 255, .13);
+  --glass-inner: rgba(255, 255, 255, .14);
+  --glow-a: rgba(122, 150, 140, .22);
+  --glow-b: rgba(154, 107, 79, .14);
+  --glow-c: rgba(34, 44, 41, .55);
+  --selection: rgba(167, 185, 177, .28);
+  --paper-card: linear-gradient(158deg, #232A28 0%, #1A201E 55%, #121716 100%);
+  --shadow-lg: 0 40px 80px -32px rgba(0, 0, 0, .82), 0 8px 24px -12px rgba(0, 0, 0, .5);
+  --shadow-md: 0 20px 42px -24px rgba(0, 0, 0, .72), 0 4px 12px -6px rgba(0, 0, 0, .45);
+  --shadow-sm: 0 10px 24px -16px rgba(0, 0, 0, .62);
+}
+
+

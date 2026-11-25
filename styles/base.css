@@ -1,0 +1,381 @@
+/* ============================================================
+   base.css — reset, stage, typography, ambient background
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { height: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color .7s var(--ease-out), color .55s var(--ease-out);
+}
+::selection { background: var(--selection); }
+
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ---------- ambient scene ---------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+  transition: background-color .8s var(--ease-out);
+}
+.ambient__base {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(120% 90% at 78% 8%, var(--glow-c) 0%, transparent 58%),
+    radial-gradient(90% 80% at 12% 92%, var(--glow-a) 0%, transparent 62%),
+    linear-gradient(168deg, var(--bg) 0%, var(--bg-2) 100%);
+  transition: background .8s var(--ease-out);
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .9;
+  will-change: transform;
+  transition: background .9s var(--ease-out);
+}
+.blob--a { width: 46vw; height: 46vw; left: -12vw; top: 8vh; background: var(--glow-a); animation: drift-a 26s var(--ease-in-out) infinite alternate; }
+.blob--b { width: 38vw; height: 38vw; right: -8vw; top: 24vh; background: var(--glow-b); animation: drift-b 32s var(--ease-in-out) infinite alternate; }
+.blob--c { width: 52vw; height: 42vw; left: 26vw; bottom: -22vw; background: var(--glow-c); opacity: .55; animation: drift-c 38s var(--ease-in-out) infinite alternate; }
+
+@keyframes drift-a { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(6vw, 4vh, 0) scale(1.08); } }
+@keyframes drift-b { from { transform: translate3d(0, 0, 0) scale(1.04); } to { transform: translate3d(-5vw, -6vh, 0) scale(.96); } }
+@keyframes drift-c { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(4vw, -4vh, 0); } }
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: .05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+body[data-theme='dark'] .grain { mix-blend-mode: screen; opacity: .06; }
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(130% 100% at 50% 40%, transparent 55%, rgba(20, 14, 8, .1) 100%);
+}
+body[data-theme='dark'] .vignette { background: radial-gradient(130% 100% at 50% 40%, transparent 45%, rgba(0, 0, 0, .5) 100%); }
+
+/* ---------- stage & screens ---------- */
+#stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.986);
+  transition:
+    opacity .5s var(--ease-out),
+    transform .62s var(--ease-out),
+    visibility 0s linear .5s;
+}
+.screen.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity .5s var(--ease-out),
+    transform .62s var(--ease-out),
+    visibility 0s linear 0s;
+}
+.screen__scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: calc(var(--nav-h) + 26px + var(--safe-t));
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.screen__scroll::-webkit-scrollbar { width: 0; height: 0; }
+
+.container {
+  width: var(--container);
+  margin-inline: auto;
+}
+
+/* ---------- typography ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow__dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: .8; }
+
+.display {
+  font-family: var(--f-serif);
+  font-weight: 500;
+  font-size: clamp(46px, 7.4vw, 112px);
+  line-height: 1.08;
+  letter-spacing: .012em;
+  color: var(--fg);
+  text-wrap: balance;
+}
+.display em {
+  font-style: normal;
+  color: var(--accent);
+}
+.display--lingcha { font-size: clamp(42px, 6.6vw, 100px); }
+.display--sxf { font-family: var(--f-serif); letter-spacing: .04em; }
+.display--sxf em { color: var(--accent); }
+
+.h2 {
+  font-family: var(--f-serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3.9vw, 56px);
+  line-height: 1.18;
+  letter-spacing: .015em;
+  text-wrap: balance;
+}
+
+.hero__sub {
+  margin-top: clamp(20px, 3vh, 34px);
+  max-width: 47ch;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.95;
+  color: var(--fg-2);
+  letter-spacing: .01em;
+}
+
+.section { padding-block: var(--section-gap); position: relative; }
+.section > .eyebrow { margin-bottom: 18px; }
+.section > .h2 { margin-bottom: clamp(34px, 6vh, 64px); }
+.section--flush { overflow: hidden; }
+.section--flush > .carousel { margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  min-height: calc(100dvh - var(--nav-h) - 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(24px, 5vh, 64px);
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(28px, 4vh, 42px); }
+
+.hero--home .display { margin-top: 22px; }
+.hero--lingcha .display { margin-top: 26px; }
+.hero--sxf .display { margin-top: 26px; }
+
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  font-family: var(--f-latin);
+  font-size: 14px;
+  letter-spacing: .1em;
+  color: var(--fg-2);
+}
+
+/* ---------- scroll cue ---------- */
+.scroll-cue {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(40px, 7vh, 76px);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-cue__track {
+  position: relative;
+  width: 22px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: block;
+}
+.scroll-cue__track i {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: cue 2.4s var(--ease-in-out) infinite;
+}
+@keyframes cue {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  55% { transform: translateY(12px); opacity: .15; }
+  70% { transform: translateY(12px); opacity: 0; }
+}
+
+/* ---------- reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(.994);
+  filter: blur(6px);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out),
+    filter var(--dur-reveal) var(--ease-out);
+  transition-delay: calc(var(--delay, 0) * 90ms);
+}
+.reveal.is-in { opacity: 1; transform: none; filter: none; }
+
+/* ---------- footer ---------- */
+.screen-footer { padding-block: clamp(48px, 8vh, 96px) calc(64px + var(--safe-b)); }
+.screen-footer__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .06em;
+}
+.screen-footer__mark { font-family: var(--f-serif); font-size: 14px; color: var(--fg-2); letter-spacing: .12em; }
+
+/* ---------- utilities ---------- */
+.note-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--fg-2);
+  letter-spacing: .04em;
+}
+.price-note, .facts__note, .swatch-note {
+  margin-top: 22px;
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* ---------- reduced motion ---------- */
+html.reduce-motion .blob { animation: none !important; }
+html.reduce-motion .reveal {
+  transform: none !important;
+  filter: none !important;
+  transition: opacity .3s ease !important;
+}
+html.reduce-motion .scroll-cue__track i { animation: none; opacity: .8; }
+html.reduce-motion .screen { transition-duration: .2s !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none !important; }
+  .reveal { transform: none !important; filter: none !important; transition: opacity .3s ease !important; }
+  .scroll-cue__track i { animation: none; }
+  .screen { transition-duration: .2s !important; }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 720px) {
+  .screen__scroll { padding-top: calc(var(--nav-h) + 14px + var(--safe-t)); }
+  .hero { min-height: calc(100dvh - var(--nav-h) - 40px); }
+  .display { font-size: clamp(40px, 12vw, 64px); }
+  .display--lingcha { font-size: clamp(36px, 10.6vw, 58px); }
+  .hero__sub { font-size: 15px; }
+  .screen-footer__row { flex-direction: column; gap: 6px; }
+}
+
+/* ============================================================
+   transitions, chrome states added by app.js
+   ============================================================ */
+
+/* compact navigation after scrolling */
+.topbar__inner { transition: height .4s var(--ease-out), background .5s var(--ease-out), box-shadow .5s var(--ease-out), border-color .4s ease; }
+.topbar.is-compact .topbar__inner {
+  height: 54px;
+  border-color: color-mix(in srgb, var(--glass-border) 70%, var(--fg) 12%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .65),
+    inset 0 -1px 0 rgba(0, 0, 0, .06),
+    0 26px 50px -30px rgba(31, 20, 8, .55);
+}
+body[data-theme='dark'] .topbar.is-compact .topbar__inner {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .16),
+    inset 0 -1px 0 rgba(0, 0, 0, .4),
+    0 26px 50px -30px rgba(0, 0, 0, .8);
+}
+.topbar.is-compact .progress { opacity: .4; }
+
+/* sheet pushes the world back */
+.screen { transition: opacity .5s var(--ease-out), transform .62s var(--ease-out), filter .5s var(--ease-out), visibility 0s linear .5s; }
+body.sheet-open .screen.is-active { transform: scale(.984); filter: saturate(.92) brightness(.965); }
+body.sheet-open .screen.is-active .screen__scroll { overflow: hidden; }
+
+/* ---------- cross-world view transition ---------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: .52s;
+  animation-timing-function: var(--ease-out);
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { animation-name: vt-out; }
+::view-transition-new(root) { animation-name: vt-in; }
+@keyframes vt-out {
+  to { opacity: 0; transform: scale(.986); filter: blur(7px); }
+}
+@keyframes vt-in {
+  from { opacity: 0; transform: scale(1.006); filter: blur(7px); }
+}
+
+/* ---------- circular appearance reveal (iOS style) ---------- */
+html.theme-vt ::view-transition-old(root) { animation: none; }
+html.theme-vt ::view-transition-new(root) {
+  animation: vt-circle .68s var(--ease-out) both;
+}
+@keyframes vt-circle {
+  from { clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 12%)); }
+  to { clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 12%)); }
+}
+
+/* leave room for the floating navigation when jumping to a section */
+[id] { scroll-margin-top: calc(var(--nav-h) + 24px); }
+.section { scroll-margin-top: calc(var(--nav-h) + 24px); }
