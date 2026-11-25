@@ -11,6 +11,14 @@ lim tê 翎茶 与 山下夆 的本地品牌介绍站。一个页面里装着两
 建议使用较新的 Chromium 内核浏览器（Chrome / Edge 120+），以完整获得：
 View Transitions 跨世界转场、圆形外观切换、backdrop-filter 液态玻璃。Safari / Firefox 会降级为淡入淡出与半透明材质，内容与交互不受影响。
 
+## 在线访问 / 分享链接
+
+- **在线版（任何地方）**：<https://xlf011014-dy.github.io/yiyeyishi/>
+- **局域网版（同一 Wi-Fi）**：<http://172.20.10.3:8090/>（需本机保持静态服务在跑；IP 会随网络变化）
+- 二维码见 `预览/分享二维码.png`，可直接发给朋友或现场扫码
+
+只发一个链接的话用在线版；局域网版适合现场、不经过公网，速度也更快。
+
 ## 站点结构
 
 ```
@@ -49,7 +57,7 @@ View Transitions 跨世界转场、圆形外观切换、backdrop-filter 液态�
 ## 内容说明
 
 - 页面里的价格、产量、数字与门店信息都是**示例**；小程序界面来自 2026-11 的 V1 原型（15 页可点击原型），不是已上线产品。
-- 「品牌资料」抽屉里的两份 PDF 链接指向同级目录 `../品牌书_交付_2026-11-25/`，即本次交付的两本品牌书。
+- 「品牌资料」抽屉与首页「两本书」里的两份 PDF 链接指向站内 `品牌书/` 目录（随站点一起部署），即本次交付的两本品牌书。
 - 品牌事实以《lim tê 翎茶｜品牌书 V3.0》《山下夆｜品牌书 V1.0》为准；山下夆标识按「夆印主线＋墨脊器物线」两套 V1.0 表达呈现。
 
 ## 技术栈
@@ -74,7 +82,21 @@ View Transitions 跨世界转场、圆形外观切换、backdrop-filter 液态�
 - 改动效参数：弹簧参数在 `js/spring.js`（response/damping）与各交互模块里；曲线 token 在 `tokens.css`。
 - 加一个世界：在 `index.html` 增加 `.screen`，在 `js/app.js` 的 `screens/scrollers` 里注册，并在顶部导航与 tabbar 加按钮即可。
 
+## 部署与更新
+
+- **在线版仓库**：<https://github.com/xlf011014-DY/yiyeyishi>（公开仓库，Pages 从 `main` 根目录发布）
+- **发布副本**：`G:\deep\_deploy\yiyeyishi` —— 只含运行所需文件（index.html / styles / js / assets / 品牌书），不含 `预览/` 与 `_qa/`
+- **更新流程**：
+  1. 改 `G:\deep\品牌介绍网站` 里的源文件
+  2. 同步到 `G:\deep\_deploy\yiyeyishi`
+  3. `cd G:\deep\_deploy\yiyeyishi`，然后 `git add -A && git commit -m "update" && git push`
+  4. Pages 约 30–60 秒自动重建，刷新链接即可
+- **局域网**：`python -m http.server 8090 --bind 0.0.0.0 --directory G:\deep\_deploy\yiyeyishi`
+  - 手机打不开时：Windows 防火墙放行 Python 的「专用网络」入站；或确认手机和电脑在同一 Wi-Fi/热点
+- **公开范围提醒**：仓库是公开的，两本品牌书 PDF 也随站点公开可下载。如果只想公开网页、不公开 PDF，把 `品牌书/` 移出仓库、改成外部私密链接即可。
+- **下架**：仓库 Settings → Pages 可关闭站点；或把仓库改为 private（免费账号 Pages 会随之失效）。
+
 ## 本地质量记录
 
 - `_qa/` 里有 Playwright 自动化脚本：三个世界逐屏截图、配方卡拖拽、轮播拖拽、抽屉开关、深浅外观、hash 路由、移动端 390×844 视图；最近一次运行无控制台错误。
-- 已验证：PDF 链接可达；字体加载约 0.9s（本机）；移动端 tabbar 与安全区正常。
+- 已验证：PDF 链接可达；字体加载约 0.9s（本机）；移动端 tabbar 与安全区正常；GitHub Pages 与局域网两个地址均用 Chromium 走查，无控制台错误。
