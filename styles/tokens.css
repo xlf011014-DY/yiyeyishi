@@ -1,6 +1,6 @@
-﻿/* ============================================================
+/* ============================================================
    tokens.css — fonts, palettes, motion & geometry tokens
-   Two worlds (lingcha / shanxiafeng) × light / dark
+   2026-11 mono edition: 黑白灰 + 暗绿；保留玻璃 / 流体动效
    ============================================================ */
 
 @font-face {
@@ -9,14 +9,12 @@
   font-weight: 100 900;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'DispA';
   src: url('../assets/fonts/CormorantGaramond.woff2') format('woff2');
   font-weight: 300 700;
   font-display: swap;
 }
-
 
 :root {
   /* type */
@@ -31,16 +29,16 @@
   --dur-press: .13s;
   --dur-ui: .24s;
   --dur-enter: .55s;
-  --dur-reveal: .9s;
+  --dur-reveal: 1.05s;
 
-  /* geometry */
-  --r-xs: 10px;
-  --r-sm: 14px;
-  --r-md: 20px;
-  --r-lg: 28px;
-  --r-xl: 38px;
+  /* geometry — 比 iOS 更克制、更接近印刷品 */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
   --r-pill: 999px;
-  --nav-h: 64px;
+  --nav-h: 60px;
   --tab-h: 66px;
   --gutter: clamp(18px, 4.2vw, 56px);
   --container: min(1240px, 100% - var(--gutter) * 2);
@@ -49,148 +47,156 @@
   --safe-t: env(safe-area-inset-top, 0px);
 }
 
-/* ---------- shared neutrals before worlds ---------- */
 body {
-  --paper-card: linear-gradient(158deg, #FFFBF2 0%, #F7F0E1 52%, #F1E7D6 100%);
-  --glass-blur: 26px;
+  --glass-blur: 22px;
   --glass-alpha: .5;
-  --shadow-lg: 0 40px 80px -32px rgba(36, 24, 10, .45), 0 8px 24px -12px rgba(36, 24, 10, .22);
-  --shadow-md: 0 20px 42px -24px rgba(36, 24, 10, .38), 0 4px 12px -6px rgba(36, 24, 10, .16);
-  --shadow-sm: 0 10px 24px -16px rgba(36, 24, 10, .35);
+  --shadow-lg: 0 40px 80px -40px rgba(0, 0, 0, .4), 0 10px 26px -18px rgba(0, 0, 0, .25);
+  --shadow-md: 0 22px 46px -30px rgba(0, 0, 0, .32), 0 4px 14px -8px rgba(0, 0, 0, .18);
+  --shadow-sm: 0 12px 26px -20px rgba(0, 0, 0, .3);
+  --paper-card: linear-gradient(158deg, #FFFFFF 0%, #F6F6F2 54%, #EDEDE7 100%);
 }
 
 /* ============================================================
-   WORLD: HOME (dual, neutral paper)
+   联合（黑白灰 + 暗绿）
    ============================================================ */
 body[data-world='home'] {
-  --bg: #F6F2E8;
-  --bg-2: #EFE9DB;
-  --fg: #1F1B15;
-  --fg-2: #4C4336;
-  --muted: #8B7F6C;
-  --line: rgba(31, 27, 21, .13);
-  --accent: #8C6A3F;
-  --accent-2: #4A5A54;
-  --accent-soft: #C9A063;
-  --glass: rgba(255, 252, 246, .52);
-  --glass-strong: rgba(255, 252, 246, .72);
-  --glass-border: rgba(255, 255, 255, .62);
+  --bg: #F1F1EE;
+  --bg-2: #E6E6E1;
+  --fg: #101210;
+  --fg-2: #3C423E;
+  --muted: #7B817C;
+  --line: rgba(16, 18, 16, .14);
+  --accent: #1C3A30;
+  --accent-2: #5F7A6C;
+  --accent-soft: #B7C4BA;
+  --glass: rgba(252, 252, 250, .53);
+  --glass-strong: rgba(252, 252, 250, .78);
+  --glass-border: rgba(255, 255, 255, .68);
   --glass-inner: rgba(255, 255, 255, .72);
-  --glow-a: rgba(201, 160, 99, .34);
-  --glow-b: rgba(74, 90, 84, .22);
-  --glow-c: rgba(255, 240, 214, .6);
-  --selection: rgba(201, 160, 99, .35);
-}
-body[data-world='lingcha'] {
-  --bg: #F7F1E4;
-  --bg-2: #F1E7D4;
-  --fg: #241C14;
-  --fg-2: #4A3524;
-  --muted: #8E7C64;
-  --line: rgba(36, 28, 20, .14);
-  --accent: #A9762D;
-  --accent-2: #C89A5B;
-  --accent-soft: #D9C39B;
-  --glass: rgba(255, 250, 240, .5);
-  --glass-strong: rgba(255, 250, 240, .74);
-  --glass-border: rgba(255, 255, 255, .66);
-  --glass-inner: rgba(255, 255, 255, .75);
-  --glow-a: rgba(201, 160, 99, .42);
-  --glow-b: rgba(169, 118, 45, .2);
-  --glow-c: rgba(255, 246, 226, .75);
-  --selection: rgba(169, 118, 45, .3);
-}
-body[data-world='shanxiafeng'] {
-  --bg: #F3F1E9;
-  --bg-2: #E7E5DC;
-  --fg: #1E1B16;
-  --fg-2: #3C4A45;
-  --muted: #7E827C;
-  --line: rgba(30, 27, 22, .14);
-  --accent: #4A5A54;
-  --accent-2: #9A6B4F;
-  --accent-soft: #9DB0A8;
-  --glass: rgba(250, 249, 244, .5);
-  --glass-strong: rgba(250, 249, 244, .74);
-  --glass-border: rgba(255, 255, 255, .66);
-  --glass-inner: rgba(255, 255, 255, .75);
-  --glow-a: rgba(157, 176, 168, .38);
-  --glow-b: rgba(154, 107, 79, .18);
-  --glow-c: rgba(255, 252, 244, .7);
-  --selection: rgba(74, 90, 84, .28);
+  --glow-a: rgba(96, 126, 110, .20);
+  --glow-b: rgba(30, 40, 34, .10);
+  --glow-c: rgba(247, 248, 244, .72);
+  --selection: rgba(28, 58, 48, .22);
+  --paper-card: linear-gradient(158deg, #FFFFFF 0%, #F6F6F2 54%, #ECECE6 100%);
 }
 
 /* ============================================================
-   WORLD × DARK
+   翎茶（暖灰）
+   ============================================================ */
+body[data-world='lingcha'] {
+  --bg: #F2F1EC;
+  --bg-2: #E8E6DF;
+  --fg: #121110;
+  --fg-2: #3F3A33;
+  --muted: #837D72;
+  --line: rgba(18, 17, 16, .15);
+  --accent: #22392F;
+  --accent-2: #6D7F70;
+  --accent-soft: #C0C6B9;
+  --glass: rgba(252, 251, 246, .53);
+  --glass-strong: rgba(252, 251, 246, .8);
+  --glass-border: rgba(255, 255, 255, .7);
+  --glass-inner: rgba(255, 255, 255, .75);
+  --glow-a: rgba(122, 133, 112, .20);
+  --glow-b: rgba(34, 57, 47, .12);
+  --glow-c: rgba(250, 249, 243, .72);
+  --selection: rgba(34, 57, 47, .22);
+  --paper-card: linear-gradient(158deg, #FFFFFF 0%, #F6F4EE 54%, #EDEAE1 100%);
+}
+
+/* ============================================================
+   山下夆（冷灰）
+   ============================================================ */
+body[data-world='shanxiafeng'] {
+  --bg: #F0F2F0;
+  --bg-2: #E3E8E4;
+  --fg: #0F1311;
+  --fg-2: #37423D;
+  --muted: #767F7A;
+  --line: rgba(15, 19, 17, .15);
+  --accent: #1B3730;
+  --accent-2: #6E8279;
+  --accent-soft: #BCC7C1;
+  --glass: rgba(250, 252, 250, .53);
+  --glass-strong: rgba(250, 252, 250, .8);
+  --glass-border: rgba(255, 255, 255, .7);
+  --glass-inner: rgba(255, 255, 255, .75);
+  --glow-a: rgba(116, 146, 134, .20);
+  --glow-b: rgba(27, 55, 48, .12);
+  --glow-c: rgba(246, 250, 247, .7);
+  --selection: rgba(27, 55, 48, .22);
+  --paper-card: linear-gradient(158deg, #FFFFFF 0%, #F5F7F4 54%, #EBEFEA 100%);
+}
+
+/* ============================================================
+   深色：黑 / 墨绿
    ============================================================ */
 body[data-theme='dark'][data-world='home'] {
-  --bg: #131211;
-  --bg-2: #0B0A09;
-  --fg: #F4EEE2;
-  --fg-2: #CFC4B2;
-  --muted: #93897A;
+  --bg: #0B0C0B;
+  --bg-2: #070807;
+  --fg: #E9EAE6;
+  --fg-2: #B9BEB9;
+  --muted: #7F857F;
   --line: rgba(255, 255, 255, .13);
-  --accent: #D2A566;
-  --accent-2: #9DB0A8;
-  --accent-soft: #8A6B3E;
-  --glass: rgba(34, 31, 27, .52);
-  --glass-strong: rgba(34, 31, 27, .74);
-  --glass-border: rgba(255, 255, 255, .13);
-  --glass-inner: rgba(255, 255, 255, .16);
-  --glow-a: rgba(210, 165, 102, .26);
-  --glow-b: rgba(120, 160, 150, .18);
-  --glow-c: rgba(60, 52, 42, .5);
-  --selection: rgba(210, 165, 102, .32);
-  --paper-card: linear-gradient(158deg, #2B251E 0%, #211C17 55%, #191512 100%);
-  --shadow-lg: 0 40px 80px -32px rgba(0, 0, 0, .8), 0 8px 24px -12px rgba(0, 0, 0, .5);
-  --shadow-md: 0 20px 42px -24px rgba(0, 0, 0, .7), 0 4px 12px -6px rgba(0, 0, 0, .45);
-  --shadow-sm: 0 10px 24px -16px rgba(0, 0, 0, .6);
-}
-body[data-theme='dark'][data-world='lingcha'] {
-  --bg: #14100C;
-  --bg-2: #0C0907;
-  --fg: #F6EEDE;
-  --fg-2: #D6C6AC;
-  --muted: #9C8A70;
-  --line: rgba(255, 255, 255, .12);
-  --accent: #D8A45F;
-  --accent-2: #E2C08B;
-  --accent-soft: #7E5C2C;
-  --glass: rgba(38, 31, 23, .5);
-  --glass-strong: rgba(38, 31, 23, .74);
-  --glass-border: rgba(255, 255, 255, .12);
-  --glass-inner: rgba(255, 255, 255, .15);
-  --glow-a: rgba(216, 164, 95, .24);
-  --glow-b: rgba(169, 118, 45, .16);
-  --glow-c: rgba(66, 50, 30, .55);
-  --selection: rgba(216, 164, 95, .32);
-  --paper-card: linear-gradient(158deg, #2E2519 0%, #241C12 55%, #1A140D 100%);
-  --shadow-lg: 0 40px 80px -32px rgba(0, 0, 0, .82), 0 8px 24px -12px rgba(0, 0, 0, .5);
-  --shadow-md: 0 20px 42px -24px rgba(0, 0, 0, .72), 0 4px 12px -6px rgba(0, 0, 0, .45);
-  --shadow-sm: 0 10px 24px -16px rgba(0, 0, 0, .62);
-}
-body[data-theme='dark'][data-world='shanxiafeng'] {
-  --bg: #0F1211;
-  --bg-2: #090B0A;
-  --fg: #EFEDE6;
-  --fg-2: #C7CCC6;
-  --muted: #8B918B;
-  --line: rgba(255, 255, 255, .12);
-  --accent: #A7B9B1;
-  --accent-2: #C09675;
-  --accent-soft: #5D6C66;
-  --glass: rgba(24, 30, 28, .52);
-  --glass-strong: rgba(24, 30, 28, .76);
+  --accent: #8FB3A1;
+  --accent-2: #C0CFC6;
+  --accent-soft: #435549;
+  --glass: rgba(18, 21, 19, .52);
+  --glass-strong: rgba(18, 21, 19, .78);
   --glass-border: rgba(255, 255, 255, .13);
   --glass-inner: rgba(255, 255, 255, .14);
-  --glow-a: rgba(122, 150, 140, .22);
-  --glow-b: rgba(154, 107, 79, .14);
-  --glow-c: rgba(34, 44, 41, .55);
-  --selection: rgba(167, 185, 177, .28);
-  --paper-card: linear-gradient(158deg, #232A28 0%, #1A201E 55%, #121716 100%);
-  --shadow-lg: 0 40px 80px -32px rgba(0, 0, 0, .82), 0 8px 24px -12px rgba(0, 0, 0, .5);
-  --shadow-md: 0 20px 42px -24px rgba(0, 0, 0, .72), 0 4px 12px -6px rgba(0, 0, 0, .45);
-  --shadow-sm: 0 10px 24px -16px rgba(0, 0, 0, .62);
+  --glow-a: rgba(120, 158, 142, .20);
+  --glow-b: rgba(40, 64, 54, .18);
+  --glow-c: rgba(54, 62, 56, .55);
+  --selection: rgba(143, 179, 161, .26);
+  --paper-card: linear-gradient(158deg, #1D211E 0%, #171A17 55%, #101210 100%);
+  --shadow-lg: 0 40px 80px -36px rgba(0, 0, 0, .85), 0 10px 26px -18px rgba(0, 0, 0, .55);
+  --shadow-md: 0 22px 46px -28px rgba(0, 0, 0, .72), 0 4px 14px -8px rgba(0, 0, 0, .45);
+  --shadow-sm: 0 12px 26px -18px rgba(0, 0, 0, .6);
 }
-
-
+body[data-theme='dark'][data-world='lingcha'] {
+  --bg: #0C0C0A;
+  --bg-2: #080806;
+  --fg: #EAE9E2;
+  --fg-2: #BCB9AD;
+  --muted: #898375;
+  --line: rgba(255, 255, 255, .12);
+  --accent: #A9C0AE;
+  --accent-2: #D2DACC;
+  --accent-soft: #4A5748;
+  --glass: rgba(22, 21, 17, .52);
+  --glass-strong: rgba(22, 21, 17, .78);
+  --glass-border: rgba(255, 255, 255, .12);
+  --glass-inner: rgba(255, 255, 255, .13);
+  --glow-a: rgba(140, 150, 118, .18);
+  --glow-b: rgba(52, 66, 48, .16);
+  --glow-c: rgba(56, 56, 46, .55);
+  --selection: rgba(169, 192, 174, .24);
+  --paper-card: linear-gradient(158deg, #1E1E18 0%, #171711 55%, #10100C 100%);
+  --shadow-lg: 0 40px 80px -36px rgba(0, 0, 0, .88), 0 10px 26px -18px rgba(0, 0, 0, .55);
+  --shadow-md: 0 22px 46px -28px rgba(0, 0, 0, .74), 0 4px 14px -8px rgba(0, 0, 0, .45);
+  --shadow-sm: 0 12px 26px -18px rgba(0, 0, 0, .62);
+}
+body[data-theme='dark'][data-world='shanxiafeng'] {
+  --bg: #080D0B;
+  --bg-2: #050806;
+  --fg: #E6EAE6;
+  --fg-2: #B4BEB8;
+  --muted: #7F8A83;
+  --line: rgba(255, 255, 255, .12);
+  --accent: #9DB8AB;
+  --accent-2: #CBD9D0;
+  --accent-soft: #3E5148;
+  --glass: rgba(16, 23, 20, .52);
+  --glass-strong: rgba(16, 23, 20, .78);
+  --glass-border: rgba(255, 255, 255, .12);
+  --glass-inner: rgba(255, 255, 255, .13);
+  --glow-a: rgba(116, 154, 138, .18);
+  --glow-b: rgba(38, 66, 56, .16);
+  --glow-c: rgba(44, 56, 50, .55);
+  --selection: rgba(157, 184, 171, .24);
+  --paper-card: linear-gradient(158deg, #191F1C 0%, #131815 55%, #0C1010 100%);
+  --shadow-lg: 0 40px 80px -36px rgba(0, 0, 0, .88), 0 10px 26px -18px rgba(0, 0, 0, .55);
+  --shadow-md: 0 22px 46px -28px rgba(0, 0, 0, .74), 0 4px 14px -8px rgba(0, 0, 0, .45);
+  --shadow-sm: 0 12px 26px -18px rgba(0, 0, 0, .62);
+}

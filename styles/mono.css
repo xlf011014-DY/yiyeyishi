@@ -1,0 +1,424 @@
+/* ============================================================
+   mono.css — 2026-11 editorial reskin
+   黑白灰 + 暗绿；保留玻璃与流体动效，但把「iOS 感」收紧成印刷品感：
+   · 分段器从胶囊改为下划线 tab
+   · 卡片更方的圆角 + 发丝线
+   · 图片默认灰阶，悬停回到彩色
+   · 跨世界转场改为「灰阶上移 / 下落」
+   ============================================================ */
+
+/* ---------- 环境：加一层极淡的竖向网格 ---------- */
+.ambient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .5;
+  background-image: repeating-linear-gradient(90deg,
+    transparent 0,
+    transparent calc(25vw - 1px),
+    var(--line) calc(25vw - 1px),
+    var(--line) 25vw);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+}
+body[data-theme='dark'] .ambient::after { opacity: .32; }
+
+/* ---------- 字：更轻、更松 ---------- */
+.display { font-weight: 400; letter-spacing: .02em; }
+.h2 { font-weight: 400; letter-spacing: .025em; }
+.eyebrow { color: var(--accent); letter-spacing: .28em; font-weight: 500; }
+.hero__sub { color: var(--fg-2); }
+.section > .h2 { position: relative; padding-bottom: clamp(22px, 3vw, 34px); }
+.section > .h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 1px;
+  background: var(--accent);
+  opacity: .55;
+}
+.display em { color: var(--accent); }
+
+/* ---------- 玻璃：烟熏玻璃，不再亮白 ---------- */
+.glass {
+  background:
+    linear-gradient(150deg,
+      rgba(255, 255, 255, .22) 0%,
+      rgba(255, 255, 255, .02) 44%,
+      rgba(255, 255, 255, .08) 100%),
+    var(--glass);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .35),
+    0 30px 60px -40px rgba(0, 0, 0, .4);
+}
+body[data-theme='dark'] .glass {
+  background:
+    linear-gradient(150deg,
+      rgba(255, 255, 255, .09) 0%,
+      rgba(255, 255, 255, .01) 44%,
+      rgba(255, 255, 255, .04) 100%),
+    var(--glass);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .14),
+    0 30px 60px -36px rgba(0, 0, 0, .85);
+}
+.glass::before { opacity: .2; }
+body[data-theme='dark'] .glass::before { opacity: .1; }
+.glass::after { opacity: .55; }
+body[data-theme='dark'] .glass::after { opacity: .35; }
+
+/* ---------- 顶部：从 iOS 胶囊改成「印刷品页眉」 ---------- */
+.topbar { top: calc(12px + var(--safe-t)); }
+.topbar__inner {
+  height: 58px;
+  border-radius: 14px;
+  padding: 0 10px 0 clamp(14px, 2vw, 22px);
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 44px -34px rgba(0, 0, 0, .45);
+}
+.brand__text { font-size: 14px; letter-spacing: .22em; color: var(--fg-2); }
+.brand__mark { color: var(--accent); }
+
+/* 分段器：文字 tab + 绿色下划线 */
+.segmented {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  gap: clamp(14px, 2.2vw, 28px);
+}
+.segmented__btn {
+  padding: 10px 1px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: var(--muted);
+}
+.segmented__btn.is-active { color: var(--fg); }
+.segmented__pill {
+  top: auto;
+  bottom: 0;
+  height: 1px;
+  border: 0;
+  border-radius: 0;
+  background: var(--accent);
+  box-shadow: none;
+}
+.segmented--tiny { gap: 12px; padding: 0 2px; }
+.segmented--tiny .segmented__btn { padding: 7px 1px; font-size: 11.5px; }
+.segmented--tiny .segmented__pill { top: auto; bottom: 0; height: 1px; }
+
+/* ---------- 按钮：小圆角、发丝线、绿色主按钮 ---------- */
+.glass-btn {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow: none;
+  font-size: 12.5px;
+  letter-spacing: .05em;
+}
+.glass-btn:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.icon-btn { border-radius: 10px; }
+.primary-btn {
+  background: var(--accent);
+  color: #F4F6F2;
+  border-color: transparent;
+  box-shadow: 0 18px 34px -24px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+.primary-btn:hover { background: var(--accent); filter: brightness(1.05); }
+.primary-btn:active { scale: .965; }
+body[data-theme='dark'] .primary-btn { color: #0B0C0B; }
+
+.progress { height: 1px; background: var(--line); }
+.progress i { background: var(--accent); }
+
+/* ---------- 底部 tab bar：保留浮动，但更方、更哑 ---------- */
+.tabbar {
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  width: min(92vw, 420px);
+  box-shadow: 0 24px 50px -34px rgba(0, 0, 0, .5);
+}
+.tabbar__pill {
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+.tabbar__btn { font-size: 10px; letter-spacing: .1em; }
+.tabbar__btn.is-active { color: var(--accent); }
+
+/* ---------- 抽屉：更方正，绿色细边 ---------- */
+.sheet { border-radius: 24px; border: 1px solid var(--line); }
+.sheet__grab i { background: color-mix(in srgb, var(--fg) 26%, transparent); }
+.sheet-card { border-radius: 12px; }
+.sheet__row { border-bottom: 1px solid var(--line); }
+.toast::before { background: var(--accent); }
+
+/* ---------- 图片：默认灰阶，悬停还色 ---------- */
+.book-link__cover {
+  filter: grayscale(1) contrast(1.04);
+  transition: filter .7s var(--ease-out), transform .6s var(--ease-out);
+}
+.book-link:hover .book-link__cover { filter: grayscale(0) contrast(1); }
+.goods-card__stone {
+  filter: grayscale(.92) contrast(1.06) brightness(.98);
+  transition: filter .7s var(--ease-out);
+}
+.goods-card:hover .goods-card__stone { filter: grayscale(.15) contrast(1.02); }
+.passport__stone { filter: grayscale(.9) contrast(1.05); }
+.plan__tray { filter: grayscale(.75) contrast(1.05); }
+.seat__tray, .seat__stone { filter: grayscale(.9); }
+.mp-shot { filter: grayscale(.18) contrast(1.02); }
+body[data-theme='dark'] .book-link__cover { filter: grayscale(1) contrast(1) brightness(.86); }
+body[data-theme='dark'] .book-link:hover .book-link__cover { filter: grayscale(0) brightness(.95); }
+body[data-theme='dark'] .mp-shot { filter: grayscale(.18) brightness(.95); }
+
+/* ---------- 品牌标志：在黑白灰里只用黑 / 白 ---------- */
+body[data-theme='dark'] .portal__logo--sxf { filter: invert(1); }
+body[data-theme='dark'] .portal__logo--lingcha { filter: invert(1); }
+body[data-theme='dark'] .sheets img,
+body[data-theme='dark'] .sheet-card img { filter: grayscale(1) invert(1) brightness(1.25); }
+.sheet-card img { filter: grayscale(1) contrast(1.05); }
+body[data-theme='dark'] .glyph--seal img { filter: invert(1); }
+
+/* 品牌门：去掉金色光斑，换成灰绿呼吸 */
+.portal--lingcha .portal__glow {
+  background:
+    radial-gradient(42% 44% at 70% 22%, rgba(122, 133, 112, .30), transparent 70%),
+    radial-gradient(50% 50% at 24% 82%, rgba(34, 57, 47, .16), transparent 72%);
+}
+.portal--sxf .portal__glow {
+  background:
+    radial-gradient(42% 44% at 70% 22%, rgba(116, 146, 134, .28), transparent 70%),
+    radial-gradient(50% 50% at 24% 82%, rgba(27, 55, 48, .14), transparent 72%);
+}
+.portal .portal__logo { filter: grayscale(1) contrast(1.04); transition: filter .7s var(--ease-out), transform .6s var(--ease-out); }
+.portal:hover .portal__logo { filter: grayscale(0) contrast(1); }
+body[data-theme='dark'] .portal .portal__logo { filter: invert(1) grayscale(1); }
+body[data-theme='dark'] .portal:hover .portal__logo { filter: invert(1) grayscale(0); }
+
+.material--leaf,
+.material--stone {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--fg) 6%, transparent), transparent 62%);
+}
+.material__ghost { opacity: .05; color: var(--fg); }
+.ghost-infinity { opacity: .055; color: var(--accent); }
+
+/* 其它强调色统一到绿 / 灰 */
+.chip { border: 1px solid var(--line); background: transparent; color: var(--fg-2); font-family: var(--f-sans); letter-spacing: .12em; }
+.acc-item__no,
+.road__no,
+.step__no,
+.play__item > span { color: var(--accent); }
+.acc-item__icon { border-radius: 8px; border-color: var(--line); }
+.recipe { border-radius: var(--r-lg); }
+.recipe__tag { color: var(--accent); }
+.recipe__qr { border-radius: 8px; }
+.dot-btn.is-active { background: var(--accent); }
+.lay-card__no, .goods-card__no { color: var(--accent); }
+.goods-card__price { color: var(--accent); }
+.def__k, .plan__tag, .seat__label { color: var(--accent-2); }
+.plan__stamp, .ridge__seal { border-radius: 10px; }
+.plan__item { border-radius: 8px; }
+.road__line i { background: linear-gradient(180deg, var(--accent), transparent); }
+.next-card__arrow { border-radius: 10px; }
+.acc-item__icon, .dot-btn, .carousel__line { }
+
+/* ---------- 新增：翎茶「玩法」概念区 ---------- */
+.play {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: clamp(26px, 4.5vw, 64px);
+  align-items: start;
+}
+.play__memo {
+  margin: 0;
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #08090A;
+  box-shadow: var(--shadow-lg);
+}
+.play__memo img {
+  display: block;
+  width: 100%;
+  filter: grayscale(1) contrast(1.08);
+}
+.play__memo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, .5);
+  border-radius: inherit;
+}
+.play__memo figcaption {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #B9C4BD;
+  text-transform: uppercase;
+}
+.play__list { display: flex; flex-direction: column; }
+.play__item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+  padding: clamp(18px, 2.4vw, 24px) 0;
+  border-bottom: 1px solid var(--line);
+}
+.play__item:first-child { border-top: 1px solid var(--line); }
+.play__item > span {
+  font-family: var(--f-latin);
+  font-size: 13px;
+  letter-spacing: .14em;
+  padding-top: 4px;
+}
+.play__item h3 {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(19px, 1.9vw, 24px);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+}
+.play__item p { font-size: 13.8px; line-height: 1.95; color: var(--fg-2); }
+.play__note {
+  margin-top: 22px;
+  font-size: 11.5px;
+  line-height: 1.9;
+  letter-spacing: .03em;
+  color: var(--muted);
+  max-width: 72ch;
+}
+.play__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 10.5px;
+  letter-spacing: .18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.play__badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- 跨世界转场：灰阶垂直转场（区别于 iOS 的横向淡入） ---------- */
+::view-transition-old(root) { animation: mono-out .46s var(--ease-out) both; }
+::view-transition-new(root) { animation: mono-in .62s var(--ease-out) both; }
+@keyframes mono-out {
+  to { opacity: 0; transform: translateY(14px) scale(.994); filter: blur(6px) grayscale(.45); }
+}
+@keyframes mono-in {
+  from { opacity: 0; transform: translateY(-18px) scale(1.004); filter: blur(6px) grayscale(.55); }
+}
+
+/* ---------- 入场：更慢、更轻 ---------- */
+.reveal {
+  transform: translate3d(0, 22px, 0);
+  filter: blur(5px);
+  transition-delay: calc(var(--delay, 0) * 110ms);
+  transition-duration: 1.1s;
+}
+.section > .h2 { max-width: 20ch; }
+
+/* 磁吸按钮：JS 驱动，press 用独立 scale 属性 */
+[data-magnetic] { will-change: transform; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 960px) {
+  .play { grid-template-columns: 1fr; }
+  .play__memo { max-width: 520px; }
+  .section > .h2 { max-width: none; }
+}
+@media (max-width: 860px) {
+  .brand__text { display: inline; font-size: 13px; }
+  .segmented--tiny { gap: 10px; }
+}
+
+/* ---------- 玩法区：配图与缩略图 ---------- */
+.play__visual { display: flex; flex-direction: column; gap: 16px; }
+.play__thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.play__thumbs figure {
+  margin: 0;
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.play__thumbs img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter .7s var(--ease-out);
+}
+.play__thumbs figure:hover img { filter: grayscale(.15) contrast(1); }
+.play__thumbs figcaption {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  color: #D5DDD7;
+  background: rgba(8, 9, 8, .55);
+  padding: 4px 7px;
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+
+/* ---------- 修正：玩法区对齐与移动端网格 ---------- */
+.play__visual { align-items: flex-start; }
+.play__memo, .play__thumbs { width: 100%; }
+@media (max-width: 760px) {
+  .ambient::after { display: none; }
+}
+
+/* ---------- 移动端 tab bar：绿色淡底，而不是 iOS 白色胶囊 ---------- */
+.tabbar__pill {
+  top: 7px;
+  height: calc(100% - 14px);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow: none;
+}
+body[data-theme='dark'] .tabbar__pill {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+/* ---------- 页面通用：标题不额外限宽，交给 <br> 控制断行 ---------- */
+.section > .h2 { max-width: none; }
+
+/* ---------- 玩法手记：控制在版面里的高度，避免手机端过长 ---------- */
+.play__memo img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
+}
+
+@media (max-width: 760px) {
+  .play__memo img { max-height: 46vh; }
+}

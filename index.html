@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -6,11 +6,12 @@
 <meta name="color-scheme" content="light dark">
 <title>一叶一石 · lim tê 翎茶 × 山下夆</title>
 <meta name="description" content="lim tê 翎茶 与 山下夆 的品牌介绍：一个把茶变成可以参与的事，一个把石头做成能接住茶汤的器。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='10' width='34' height='34' rx='10' fill='%23A9762D'/%3E%3Crect x='24' y='20' width='34' height='34' rx='10' fill='%234A5A54' fill-opacity='.9'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='10' width='34' height='34' rx='10' fill='%231C3A30'/%3E%3Crect x='24' y='20' width='34' height='34' rx='10' fill='%238FA99A' fill-opacity='.9'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles/tokens.css">
 <link rel="stylesheet" href="styles/base.css">
 <link rel="stylesheet" href="styles/glass.css">
 <link rel="stylesheet" href="styles/sections.css">
+<link rel="stylesheet" href="styles/mono.css">
 </head>
 <body data-world="home" data-theme="light">
 <script>
@@ -83,9 +84,9 @@
           <a class="portal portal--lingcha tilt reveal glass" data-delay="3" data-goto="lingcha" href="#/lingcha" aria-label="进入翎茶">
             <div class="portal__glow"></div>
             <div class="portal__top"><span class="portal__no">01</span><span class="portal__tag">茶生活品牌</span></div>
-            <img class="portal__logo portal__logo--lingcha" src="assets/lingcha/logo-lockup-gold.png" alt="lim tê 翎茶" draggable="false">
+            <img class="portal__logo portal__logo--lingcha" src="assets/lingcha/logo-lockup-black.png" alt="lim tê 翎茶" draggable="false">
             <div class="portal__bottom">
-              <span class="portal__line">茶要认真，喝茶可以轻松。</span>
+              <span class="portal__line">茶无极限</span>
               <span class="portal__arrow" aria-hidden="true">→</span>
             </div>
           </a>
@@ -111,7 +112,7 @@
           <article class="material material--leaf reveal" data-parallax="0.06">
             <span class="material__ghost">叶</span>
             <p class="material__label">LEAF / 翎茶</p>
-            <p class="material__text">从闽南出发，在云南遇见茶。一片叶子可以有一万种喝法：拼配、命名、复刻，留下一张自己的配方卡。</p>
+            <p class="material__text">闽南出发，在云南遇见茶  一片叶子可以有一万种喝法：拼配、命名、复刻，留下一张自己的配方卡。</p>
           </article>
           <article class="material material--stone reveal" data-delay="1" data-parallax="-0.04">
             <span class="material__ghost">石</span>
@@ -138,7 +139,7 @@
           <article class="tenet glass tilt reveal" data-delay="2">
             <span class="tenet__no">03</span>
             <h3>相逢的茶席</h3>
-            <p>翎是叶，峰是器。两个独立品牌只在茶席上同框——可联名，不合并。</p>
+            <p>翎是叶，峰是器</p>
           </article>
         </div>
       </section>
@@ -200,9 +201,9 @@
           <span class="chip glass">lim tê</span><span class="chip glass">Limit</span><span class="chip glass">翎</span>
         </div>
         <h1 class="display display--lingcha reveal" data-delay="1">茶要认真，<br><em>喝茶可以轻松。</em></h1>
-        <p class="hero__sub reveal" data-delay="2">一个从闽南出发、在云南遇见茶的年轻茶生活品牌。<br>把「喝」变成「参与」：自己拼、自己命名，报编号就能复刻。</p>
+        <p class="hero__sub reveal" data-delay="2">闽南出发、在云南遇见茶的年轻茶生活品牌。<br>把「喝」变成「参与」：自己拼、自己命名，报编号就能复刻。</p>
         <div class="hero__actions reveal" data-delay="3">
-          <button class="glass-btn primary-btn" data-scroll-to="lc-formula">看一张配方卡 <span aria-hidden="true">↓</span></button>
+          <button class="glass-btn primary-btn" data-magnetic data-scroll-to="lc-formula">看一张配方卡 <span aria-hidden="true">↓</span></button>
           <button class="glass-btn" data-goto="shanxiafeng">另一个品牌 · 山下夆</button>
         </div>
         <div class="ghost-infinity" aria-hidden="true" data-parallax="0.04">∞</div>
@@ -226,7 +227,7 @@
           </button>
           <button class="acc-item reveal" data-delay="2" aria-expanded="false">
             <span class="acc-item__no">03</span>
-            <span class="acc-item__main"><span class="acc-item__title">翎</span><span class="acc-item__sub">主理人名字里的一个字</span></span>
+            <span class="acc-item__main"><span class="acc-item__title">翎</span><span class="acc-item__sub">一个字亦是符号</span></span>
             <span class="acc-item__icon" aria-hidden="true"></span>
             <span class="acc-item__body"><span>它成了品牌自己的记号，也是标识里那个最容易被记住的笔画。</span></span>
           </button>
@@ -352,8 +353,33 @@
         </div>
       </section>
 
+      <section class="section container" id="lc-play" aria-labelledby="lc-play-h">
+        <p class="eyebrow reveal">06 / PLAY · 概念探索</p>
+        <h2 class="h2 reveal" id="lc-play-h">茶，也可以有下一层。</h2>
+        <div class="play">
+          <div class="play__visual reveal">
+            <span class="play__badge">CONCEPT / 未上线</span>
+            <figure class="play__memo">
+              <img src="assets/lingcha/memo-play.jpg" alt="翎茶玩法手记节选：宝箱、抽签与神秘商店" loading="lazy">
+              <figcaption>内部讨论手记 · 2026.11 · 概念阶段</figcaption>
+            </figure>
+            <div class="play__thumbs">
+              <figure><img src="assets/lingcha/ui-draw.png" alt="抽茶签 V1 原型界面" loading="lazy"><figcaption>抽茶签 / V1 原型</figcaption></figure>
+              <figure><img src="assets/lingcha/ui-cup.png" alt="点单拼茶 V1 原型界面" loading="lazy"><figcaption>点单 · 拼茶 / V1 原型</figcaption></figure>
+            </div>
+          </div>
+          <div class="play__list">
+            <article class="play__item reveal"><span>01</span><div><h3>宝箱 / 卡包</h3><p>门店只发售 5%–10%，其余在小程序以抽签或开箱的形式发布。形式是宝箱或卡包，可交易，但每一份都要能被追溯。</p></div></article>
+            <article class="play__item reveal" data-delay="1"><span>02</span><div><h3>抽签</h3><p>发售 100 套地界秋古树，其中 5 套为地界春古树；若抽中春古树，对应 5 套升级为单株级。概率、数量与批次全部公示。</p></div></article>
+            <article class="play__item reveal" data-delay="2"><span>03</span><div><h3>神秘商店</h3><p>不定时开放，用折扣放出过往产品，限时一天；制造的不是焦虑，是回访的理由。</p></div></article>
+            <article class="play__item reveal" data-delay="3"><span>04</span><div><h3>二级市场 / 鉴定</h3><p>开出的产品可交易、官方回收或寄存，也可寄出；交易走鉴定，延伸出茶叶鉴定服务与商家入驻。真实性，最终落在编号与身世卡上。</p></div></article>
+          </div>
+        </div>
+        <p class="play__note reveal">以上为概念探索，未上线；涉及随机、交易与鉴定的玩法，需先完成合规评估。对外只说「我们在试着让茶更好玩」，不承诺收益。</p>
+      </section>
+
       <section class="section container" aria-labelledby="lc-space">
-        <p class="eyebrow reveal">06 / SPACE</p>
+        <p class="eyebrow reveal">07 / SPACE</p>
         <h2 class="h2 reveal" id="lc-space">从门口到离店，<br>被好好对待。</h2>
         <div class="steps">
           <div class="step reveal"><span class="step__no">01</span><span class="step__t">看</span><p>一块安静的木质门头，一面留白的墙，几罐写着产地、年份与克价的茶。</p></div>
@@ -364,7 +390,7 @@
       </section>
 
       <section class="section container facts" aria-labelledby="lc-facts">
-        <p class="eyebrow reveal">07 / BY THE NUMBERS</p>
+        <p class="eyebrow reveal">08 / BY THE NUMBERS</p>
         <h2 class="h2 reveal" id="lc-facts">现在的翎茶</h2>
         <div class="fact-grid">
           <div class="fact reveal"><span class="fact__num"><b class="count" data-count="15">0</b><i>页</i></span><span class="fact__label">可点击小程序原型</span></div>
@@ -397,7 +423,7 @@
         <h1 class="display display--sxf reveal" data-delay="1">山下<em>相逢</em>。</h1>
         <p class="hero__sub reveal" data-delay="2">石头不在山顶，也不在矿脉深处，<br>是在溪水里被冲了很多年才露出来的。</p>
         <div class="hero__actions reveal" data-delay="3">
-          <button class="glass-btn primary-btn" data-scroll-to="sxf-goods">看一件器 <span aria-hidden="true">↓</span></button>
+          <button class="glass-btn primary-btn" data-magnetic data-scroll-to="sxf-goods">看一件器 <span aria-hidden="true">↓</span></button>
           <button class="glass-btn" data-goto="lingcha">另一个品牌 · 翎茶</button>
         </div>
         <div class="ridge" aria-hidden="true" data-parallax="-0.05">
@@ -412,7 +438,7 @@
           <span class="glyph">山</span><span class="glyph">下</span><span class="glyph-eq__op">＋</span><span class="glyph glyph--seal"><img src="assets/shanxiafeng/mark.svg" alt="夆印"></span><span class="glyph-eq__op">＝</span><span class="glyph glyph--peak">峯</span>
         </div>
         <div class="def-grid">
-          <article class="def glass reveal"><span class="def__k">字</span><p>峯，峰的异体写法，主理人名字里的「峰」。</p></article>
+          <article class="def glass reveal"><span class="def__k">字</span><p>峯，峰的繁体写法</p></article>
           <article class="def glass reveal" data-delay="1"><span class="def__k">音</span><p>夆读 féng，同「逢」，相遇。</p></article>
           <article class="def glass reveal" data-delay="2"><span class="def__k">地景</span><p>山下，米粒石显露的地方——不在山顶，在溪流里。</p></article>
           <article class="def glass reveal" data-delay="3"><span class="def__k">物象</span><p>米与丰：颗粒如米，夆下部为「丰」。</p></article>

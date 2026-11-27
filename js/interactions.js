@@ -397,9 +397,39 @@
   /* ------------------------------------------------------------
      boot
      ------------------------------------------------------------ */
+  /* ------------------------------------------------------------
+     magnetic — editorial hover weight (pointer devices only)
+     ------------------------------------------------------------ */
+  function initMagnetic() {
+    if (typeof MotionSpring === 'undefined') return;
+    if (!Site.prefersFinePointer || !Site.prefersFinePointer()) return;
+    $$('[data-magnetic]').forEach(function (el) {
+      var mx = MotionSpring.spring(0, {
+        response: .38, damping: 1,
+        onUpdate: apply
+      });
+      var my = MotionSpring.spring(0, {
+        response: .32, damping: 1,
+        onUpdate: apply
+      });
+      function apply() {
+        el.style.transform = 'translate3d(' + mx.value.toFixed(2) + 'px,' + my.value.toFixed(2) + 'px,0)';
+      }
+      el.addEventListener('pointermove', function (e) {
+        if (!Site.motionOK()) return;
+        var r = el.getBoundingClientRect();
+        mx.to((e.clientX - r.left - r.width / 2) * 0.13);
+        my.to((e.clientY - r.top - r.height / 2) * 0.24);
+      });
+      el.addEventListener('pointerleave', function () { mx.to(0); my.to(0); });
+      el.addEventListener('blur', function () { mx.to(0); my.to(0); });
+    });
+  }
+
   function boot() {
     initSpecular();
     initTilt();
+    initMagnetic();
     initRecipe();
     initCarousel($('#lc-carousel'));
     initCarousel($('#sxf-carousel'));
