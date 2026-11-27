@@ -19,6 +19,12 @@ View Transitions 跨世界转场、圆形外观切换、backdrop-filter 液态�
 
 只发一个链接的话用在线版；局域网版适合现场、不经过公网，速度也更快。
 
+## 改内容
+
+- **网页文案/图片**：编辑 `index.html`（及 `assets/`），保存后双击 **`发布更新.cmd`** 即可上线。
+- **品牌书 PDF**：编辑 `..\brandbook\lingcha\draft.md` 或 `..\brandbook\shanxiafeng\draft.md`（封面/插页等在 `..\brandbook\_build\build.mjs`），双击 **`..\brandbook\_build\重出品牌书.cmd`** 重出 PDF/DOCX，再双击 `发布更新.cmd`。
+- 详细的「改哪里 → 怎么重出 → 注意事项」对照表在本地 **`_qa\编辑指引.md`**（不随站点公开）；也可以把要改的内容发我，我代改并发布。
+
 ## 站点结构
 
 ```
